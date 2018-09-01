@@ -8,6 +8,19 @@
       'displayErrorDetails' => true,
     ]
   ]);
+  $container = $app->getContainer();
+  $container['view'] = function($container){
+    $view = new \Slim\Views\Twig(__DIR__ . '/../resources/views',[
+      'cache' => false,
+    ]);
 
-    require __DIR__ . '/../app/routes.php';
+    $view->addExtension(new \Slim\Views\TwigExtension(
+      $container->router,
+      $container->request->getUri()
+    ));
+
+    return $view;
+  };
+
+  require __DIR__ . '/../app/routes.php';
  ?>
