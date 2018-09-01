@@ -8,6 +8,8 @@
       'displayErrorDetails' => true,
     ]
   ]);
+
+
   $container = $app->getContainer();
   $container['view'] = function($container){
     $view = new \Slim\Views\Twig(__DIR__ . '/../resources/views',[
@@ -20,6 +22,10 @@
     ));
 
     return $view;
+  };
+
+  $container['HomeController'] = function ($container){
+    return new \App\Controllers\HomeController;
   };
 
   require __DIR__ . '/../app/routes.php';
