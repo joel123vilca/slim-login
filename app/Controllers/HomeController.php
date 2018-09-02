@@ -1,12 +1,20 @@
 <?php
   namespace App\Controllers;
 
-  class HomeController
+  use \Slim\Views\Twig as View;
+
+  class HomeController extends Controller
   {
+    protected $view;
+
+    public function __construct(View $view)
+    {
+      $this->view = $view;
+    }
+
     public function index($request, $response)
     {
-      var_dump($request->getParam('name'));
-      return 'home controller';
+      return $this->view->render($response, 'home.twig');
     }
   }
 

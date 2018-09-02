@@ -25,7 +25,7 @@
   };
 
   $container['HomeController'] = function ($container){
-    return new \App\Controllers\HomeController;
+    return new \App\Controllers\HomeController($container->view);
   };
 
   require __DIR__ . '/../app/routes.php';
