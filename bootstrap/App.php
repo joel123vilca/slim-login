@@ -6,11 +6,32 @@
   $app = new \Slim\App([
     'settings'=>[
       'displayErrorDetails' => true,
-    ]
+      'db'=>[
+        'driver' => 'mysql',
+        'host' => 'localhost',
+        'database' => 'slim-test',
+        'username' => 'root',
+        'password' => '',
+        'charset' => 'utf8',
+        'collation' => 'utf8_unicode_ci',
+        'prefix' => '',
+      ]
+    ],
   ]);
 
 
   $container = $app->getContainer();
+
+  $capsule = new \Illuminate\Database\Capsule\Manager;
+  $capsule->addConnection($container['settings']['db']);
+  $capsule->setAsGlobal();
+  $capsule->bootEloquent();
+
+
+  $container['db']= function ($container) use ($capsule){
+    return $capsule;
+  };
+  
   $container['view'] = function($container){
     $view = new \Slim\Views\Twig(__DIR__ . '/../resources/views',[
       'cache' => false,
