@@ -1,15 +1,20 @@
 <?php
   namespace App\Controllers;
 
-  use \Slim\Views\Twig as View;
+  use App\Models\User;
+  use Slim\Views\Twig as View;
 
   class HomeController extends Controller
   {
     public function index($request, $response)
     {
-      $user = $this->db->table('user')->find(1);
-      var_dump($user);
-      die();
+
+      User::create([
+        'name'=>'joel',
+        'email'=>'joel@gmail.com',
+        'password'=>'12345',
+      ]);
+
       return $this->view->render($response, 'home.twig');
     }
   }
