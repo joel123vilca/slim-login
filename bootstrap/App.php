@@ -31,7 +31,7 @@
   $container['db']= function ($container) use ($capsule){
     return $capsule;
   };
-  
+
   $container['view'] = function($container){
     $view = new \Slim\Views\Twig(__DIR__ . '/../resources/views',[
       'cache' => false,
@@ -47,6 +47,10 @@
 
   $container['HomeController'] = function ($container){
     return new \App\Controllers\HomeController($container);
+  };
+
+  $container['AuthController'] = function ($container){
+    return new \App\Controllers\Auth\AuthController($container);
   };
 
   require __DIR__ . '/../app/routes.php';
