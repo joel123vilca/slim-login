@@ -8,13 +8,11 @@
   {
     public function index($request, $response)
     {
-
-      User::create([
-        'name'=>'joel',
-        'email'=>'joel@gmail.com',
-        'password'=>'12345',
-      ]);
-
+       User::create([
+         'name'=>'Alex Garret',
+        'email'=>'billy@codecourse',
+         'password'=>'123',
+    ]);
       return $this->view->render($response, 'home.twig');
     }
   }
